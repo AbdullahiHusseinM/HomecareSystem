@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Caregiver;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class CaregiverController extends Controller
      */
     public function index()
     {
-        //
+        $caregivers = Caregiver::all();
+
+        return $caregivers;
     }
 
     /**
@@ -24,7 +27,7 @@ class CaregiverController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +38,21 @@ class CaregiverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $user = auth()->user();
+
+        $caregiver = new Caregiver;
+
+
+        $caregiver -> passport_photo = $request -> passport_photo;
+        $caregiver -> license_number = $request -> license_number;
+        $caregiver -> date_of_birth = $request -> date_of_birth;
+        $caregiver -> education = $request -> education;
+        $caregiver -> experience = $request -> experience;
+
+        
+
     }
 
     /**

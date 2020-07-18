@@ -46,6 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'caregiver' => 'caregiver',
         'transport' => 'transport',
         'security' => 'security',
+        'pharmacy' => 'pharmacy',
     ];
 
     public function caregiver()
@@ -67,6 +68,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Admin::class, 'foreign_id', 'id');
     }
+    
+    public function pharmacy()
+    {
+        return $this->belongsTo(Pharmacy::class, 'foreign_id', 'id');
+    }
 
     public function details()
     {
@@ -82,6 +88,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
             case 'transport': 
                 return $this->transport;
+
+                case 'pharmacy': 
+                    return $this->pharmacy;
 
             default: 
                 abort(401);

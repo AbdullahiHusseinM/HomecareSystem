@@ -25,12 +25,7 @@ class CreateCaregiversTable extends Migration
             $table->string('physical_location');
             $table->string('email');
             $table->string('verification_status')->default('false')->nullable();
-            $table->string('passport_photo')->nullable();
-            $table->string('license_number')->nullable();
-            $table->string('license_certificate')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('education')->nullable();
-            $table->string('experience')->nullable();
+           
             $table->timestamps();
         });
     }

@@ -22,15 +22,7 @@ class CreateTransportersTable extends Migration
             $table->string('location');
             $table->string('email');
             $table->string('password');
-            $table->string('radius_of_operation')->nullable();
-            $table->string('drivers_license')->nullable();
-            $table->string('identification_card')->nullable();
-            $table->bigInteger('phone_number')->nullable();
-            $table->string('mode_of_transport')->nullable();
-            $table->string('passport_photo')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('model_mode_of_transport')->nullable();
-            $table->integer('years_of_experience')->nullable();
+
           
 
             $table->timestamps();

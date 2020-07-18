@@ -25,4 +25,9 @@ class Transporter extends Model
     {
         return $this->hasOne(User::class, 'foreign_id', 'id');
     }
+
+    public function transporter_profile()
+    {
+        return $this->hasOne('App\TransporterProfile');
+    }
 }

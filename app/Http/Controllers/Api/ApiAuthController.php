@@ -8,6 +8,7 @@ use App\User;
 use App\Caregiver;
 use App\Securityprovider;
 use App\Transporter;
+use App\Pharmacy;
 use Illuminate\Http\Request;
 
 class ApiAuthController extends Controller
@@ -31,12 +32,14 @@ class ApiAuthController extends Controller
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
 
         return response(['user'=> auth()->user(), 'accessToken'=>$accessToken]);
+
+      
     }
 
 
     public function Caregiverregister(Request $request)
     {
-
+           
         
         
         $validatedData = $request->validate([
@@ -122,6 +125,40 @@ public function Transporterregister(Request $request)
     $accessToken = $user->createToken('authToken')->accessToken;
 
     return response(['securityprovider'=> $securityprovider, 'accessToken'=>$accessToken]);
+    }
+
+    public function Pharmacyregister(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:20',
+            'license_number' => 'required|max:20',
+            'location' => 'required',
+            'contact_first_name' => 'required',
+            'contact_last_name' => 'required',
+            'contact_surname' => 'required',
+            'contact_phone_number' => 'required|max:10',
+            'email' => 'required|email|unique:users'
+        ]);
+
+        $pharmacy = Pharmacy::create($request->all());
+        
+
+        $user = $pharmacy->user()->create([
+            'role' => 'pharmacy',
+            'email' => $validatedData['email'],
+            'password' => bcrypt($request->password)
+        ]);
+
+        $accessToken = $user->createToken('authToken')->accessToken;
+
+        return response([
+            'pharmacy'=> $pharmacy, 'accessToken'=>$accessToken,
+            "message" => 'Registration Successful'
+        ], 200);
+       
+
+     
+
     }
 
     }

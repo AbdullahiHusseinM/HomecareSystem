@@ -21,6 +21,8 @@ class CreatePharmaciesTable extends Migration
             $table->string('contact_first_name');
             $table->string('contact_surname');
             $table->string('contact_last_name');
+            $table->string('contact_phone_number');
+            $table->string('email');
             $table->timestamps();
         });
     }

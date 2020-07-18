@@ -25,4 +25,9 @@ class Caregiver extends Model
     {
         return $this->hasOne(User::class, 'foreign_id', 'id');
     }
+
+    public function caregiverprofile()
+    {
+        return $this->hasOne(caregiverprofile::class);
+    }
 }
