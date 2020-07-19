@@ -41,14 +41,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    const ROLES = [
-        'admin' => 'admin',
-        'caregiver' => 'caregiver',
-        'transport' => 'transport',
-        'security' => 'security',
-        'pharmacy' => 'pharmacy',
-    ];
-
     public function caregiver()
     {
         return $this->belongsTo(Caregiver::class, 'foreign_id', 'caregiver_id');
@@ -72,29 +64,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pharmacy()
     {
         return $this->belongsTo(Pharmacy::class, 'foreign_id', 'id');
-    }
-
-    public function details()
-    {
-        switch($this->role) {
-            case 'admin': 
-                return $this->admin;
-
-            case 'caregiver':
-                return $this->caregiver;
-
-            case 'security': 
-                return $this->security;
-
-            case 'transport': 
-                return $this->transport;
-
-                case 'pharmacy': 
-                    return $this->pharmacy;
-
-            default: 
-                abort(401);
-        }
     }
 
 

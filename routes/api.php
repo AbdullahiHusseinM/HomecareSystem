@@ -48,12 +48,12 @@ Route::get('/email/verify/{id}/{hash}', 'Api\VerificationController@verify')->na
 /* Caregiver Controller Routes*/
 
 
-Route::post('caregivers', 'CaregiverProfileController@store');
+Route::post('caregivers', 'CaregiverProfileController@store')->middleware('role:caregiver');
 
-Route::get('caregivers', 'CaregiverProfileController@index');
-Route::get('caregivers/{id}', 'CaregiverProfileController@show');
-Route::post('caregivers/{id}', 'CaregiverProfileController@update');
-Route::delete('caregivers/{id}', 'CaregiverProfileController@destroy');
+Route::get('caregivers', 'CaregiverProfileController@index')->middleware('role:caregiver');
+Route::get('caregivers/{id}', 'CaregiverProfileController@show')->middleware('role:caregiver');
+Route::post('caregivers/{id}', 'CaregiverProfileController@update')->middleware('role:caregiver');
+Route::delete('caregivers/{id}', 'CaregiverProfileController@destroy')->middleware('role:caregiver');
 
 /*Transporter Controller Routes */
 

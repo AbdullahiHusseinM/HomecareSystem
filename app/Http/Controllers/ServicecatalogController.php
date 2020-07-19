@@ -14,7 +14,11 @@ class ServicecatalogController extends Controller
      */
     public function index()
     {
-        //
+        $servicecatalogs = ServiceCatalog::all();
+
+        return response()->json([
+            'data' => $servicecatalogs
+        ], 200);
     }
 
     /**
@@ -24,7 +28,7 @@ class ServicecatalogController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +39,31 @@ class ServicecatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'service_name' => 'required',
+            'service_description' => 'required',
+            'specific_service_name' => 'required',
+            'specific_service_description'  => 'required',
+            'pharmaceutical_product_name'  => 'required',
+            'pharmaceutical_product_use'  => 'required',
+            'pharmaceutical_product_priority'  => 'required',
+            'equipment_name'  => 'required',
+            'equipment_use'  => 'required',
+            'equipment_priority'  => 'required',
+        ];
+
+        $this -> validate($request, $rules);
+
+        $data = $request->all();
+
+
+        $servicecatalog  = ServiceCatalog::create($data);
+
+        return response()->json([
+            'data' => $servicecatalog
+        ], 201);
+
+
     }
 
     /**
@@ -44,9 +72,13 @@ class ServicecatalogController extends Controller
      * @param  \App\Servicecatalog  $servicecatalog
      * @return \Illuminate\Http\Response
      */
-    public function show(Servicecatalog $servicecatalog)
+    public function show($id)
     {
-        //
+        $servicecatalog = ServiceCatalog::findorFail($id);
+
+        return response()->json([
+            'data' => $servicecatalog
+        ], 200);
     }
 
     /**
@@ -69,8 +101,21 @@ class ServicecatalogController extends Controller
      */
     public function update(Request $request, Servicecatalog $servicecatalog)
     {
-        //
+        $servicecatalog = ServiceCatalog::findorFail($id);
+
+        $updated = $servicecatalog->fill($request->all())
+        ->save();
+        if ($updated) {
+            return response()->json([
+                'message' => 'Service Catalog Updated Successfully'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, Service catalog could not be updated'
+            ], 500);
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +125,12 @@ class ServicecatalogController extends Controller
      */
     public function destroy(Servicecatalog $servicecatalog)
     {
-        //
+        $servicecatalog = ServiceCatalog::findOrFail($id);
+
+        $servicecatalog->delete();
+
+        return response([
+            "message" => "Service catalog Deleted Successfully"
+        ]);
     }
 }
