@@ -30,4 +30,5 @@ class Caregiver extends Model
     {
         return $this->hasOne(caregiverprofile::class);
     }
+
 }

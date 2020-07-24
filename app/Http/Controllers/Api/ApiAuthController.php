@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Bouncer;
 use App\Http\Controllers\Controller;
 
 use App\User;
@@ -64,6 +65,8 @@ class ApiAuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
+        $user->assign('caregiver');
+
       
 
         $accessToken = $user->createToken('authToken')->accessToken;
@@ -94,6 +97,8 @@ public function Transporterregister(Request $request)
         'password' => bcrypt($request->password)
     ]);
 
+    $user->assign('transporter');
+
 
     $accessToken = $user->createToken('authToken')->accessToken;
 
@@ -121,6 +126,7 @@ public function Transporterregister(Request $request)
         'password' => bcrypt($request->password)
     ]);
 
+    $user->assign('securityprovider');
 
     $accessToken = $user->createToken('authToken')->accessToken;
 
@@ -148,6 +154,8 @@ public function Transporterregister(Request $request)
             'email' => $validatedData['email'],
             'password' => bcrypt($request->password)
         ]);
+
+        $user->assign('pharmacy');
 
         $accessToken = $user->createToken('authToken')->accessToken;
 

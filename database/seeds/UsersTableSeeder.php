@@ -19,30 +19,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $role1 = Role::create([
-            'name' => 'admin'
-        ]);
-
-        $role2 = Role::create([
-            'name' => 'caregiver'
-        ]);
-
-
-        $role3 = Role::create([
-            'name' => 'pharmacy'
-        ]);
-
-        $role4 = Role::create([
-            'name' => 'securityprovider'
-        ]);
-
-        $role5 = Role::create([
-            'name' => 'transporter'
-        ]);
-
-        $role6 = Role::create([
-            'name' => 'client'
-        ]);
+    
     }
 
 }

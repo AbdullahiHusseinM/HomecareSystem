@@ -40,6 +40,8 @@ class TransporterProfileController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $transporterprofiles = new TransporterProfile;
 
         $transporterprofiles-> transporter_id = $request->get('transporter_id');

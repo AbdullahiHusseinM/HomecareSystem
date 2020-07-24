@@ -14,7 +14,13 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::all();
+
+        return response()->json([
+            'data' => $payments
+        ], 200);
+
+        dd($payments);
     }
 
     /**
@@ -35,7 +41,28 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'date_paid' => 'required',
+            'service_offered' => 'required',
+            'amount_paid' => 'required',
+            'payment_ref_number' => 'required',
+            'client_name' => 'required',
+            'client_ref_number' => 'required'
+        ];
+
+        
+
+        $this->validate($request, $rules);
+
+
+        $data = $request->all();
+       
+
+        $payment = Payment::create($data);
+
+        return response()->json([
+            'data' => $payment
+        ], 201);
     }
 
     /**
@@ -44,9 +71,13 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show($id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+
+        return response()->json([
+            'data' => $payment
+        ], 200);
     }
 
     /**
@@ -67,9 +98,22 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(Request $request, $id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+
+        $updated = $payment->fill($request->all())
+        ->save();
+        if ($updated) {
+            return response()->json([
+                'message' => 'Payment Updated Successfully'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, Payment could not be updated'
+            ], 500);
+    }
     }
 
     /**
@@ -78,8 +122,14 @@ class PaymentController extends Controller
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
-        //
+        $payment = Payment::findOrFail($id);
+
+        $payment -> delete();
+
+        return response()->json([
+            'message' => 'Payment deleted succssfully'
+        ], 200);
     }
 }

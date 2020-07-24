@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servicecatalog extends Model
 {
-    protected $table = 'serviceatalogs';
+    protected $table = 'servicecatalogs';
 
 
     protected $fillable = [
@@ -20,6 +20,6 @@ class Servicecatalog extends Model
         'equipment_name',
         'equipment_use',
         'equipment_priority',
-        
+        
     ];
 }

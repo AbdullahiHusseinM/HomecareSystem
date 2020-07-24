@@ -48,22 +48,22 @@ Route::get('/email/verify/{id}/{hash}', 'Api\VerificationController@verify')->na
 /* Caregiver Controller Routes*/
 
 
-Route::post('caregivers', 'CaregiverProfileController@store')->middleware('role:caregiver');
+Route::post('caregivers', 'CaregiverProfileController@store')->name('store-caregiver-profile');
 
-Route::get('caregivers', 'CaregiverProfileController@index')->middleware('role:caregiver');
-Route::get('caregivers/{id}', 'CaregiverProfileController@show')->middleware('role:caregiver');
-Route::post('caregivers/{id}', 'CaregiverProfileController@update')->middleware('role:caregiver');
-Route::delete('caregivers/{id}', 'CaregiverProfileController@destroy')->middleware('role:caregiver');
+Route::get('caregivers', 'CaregiverProfileController@index')->name('list-caregiver-profile');
+Route::get('caregivers/{id}', 'CaregiverProfileController@show')->name('show-caregiver-profile');
+Route::post('caregivers/{id}', 'CaregiverProfileController@update')->name('update-caregiver-profile');
+Route::delete('caregivers/{id}', 'CaregiverProfileController@destroy')->name('delete-caregiver-profile');
 
 /*Transporter Controller Routes */
 
 
-Route::post('transporters', 'TransporterProfileController@store');
+Route::post('transporters', 'TransporterProfileController@store')->name('store-transporter-profile');
 
-Route::get('transporters', 'TransporterProfileController@index');
-Route::get('transporters/{id}', 'TransporterProfileController@show');
-Route::post('transporters/{id}', 'TransporterProfileController@update');
-Route::delete('transporters/{id}', 'TransporterProfileController@destroy');
+Route::get('transporters', 'TransporterProfileController@index')->name('list-transporter-profile');
+Route::get('transporters/{id}', 'TransporterProfileController@show')->name('show-transporter-profile');
+Route::post('transporters/{id}', 'TransporterProfileController@update')->name('update-transporter-profile');
+Route::delete('transporters/{id}', 'TransporterProfileController@destroy')->name('delete-transporter-profile');
 
 /*Training session Controller Routes */
 
@@ -76,3 +76,26 @@ Route::post('trainingsessions/{id}', 'TrainingsessionsController@update');
 Route::delete('trainingsessions/{id}', 'TrainingsessionsController@destroy');
 
 
+
+Route::post('invoices', 'InvoiceController@store');
+Route::get('invoices', 'InvoiceController@index');
+Route::get('invoices/{id}', 'InvoiceController@show');
+Route::post('invoices/{id}', 'InvoiceController@update');
+Route::delete('invoices/{id}', 'InvoiceController@destroy');
+
+
+Route::post('servicecatalogs','ServicecatalogController@store');
+Route::get('servicecatalogs', 'ServicecatalogController@index');
+Route::get('servicecatalogs/{id}', 'ServiceCatalogController@show');
+Route::post('servicecatalogs/{id}', 'ServicecatalogController@update');
+Route::delete('servicecatalogs/{id}', 'ServicecatalogController@destroy');
+
+
+Route::post('payments', 'PaymentController@store');
+Route::get('payments', 'PaymentController@index');
+Route::get('payments/{id}', 'PaymentController@show');
+Route::post('payments/{id}', 'PaymentController@update');
+Route::delete('payments/{id}', 'PaymentController@destroy');
+
+
+Route::get('/v1/initialize', 'InitController@init');
