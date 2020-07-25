@@ -24,6 +24,17 @@ class CreateCaregiverProfilesTable extends Migration
             $table->date('date_of_birth');
             $table->string('education');
             $table->string('experience');
+            $table->string('name_of_institution');
+            $table->string('acquired_qualification');
+            $table->date('qualification_start_date');
+            $table->date('qualification_end_date');
+            $table->string('copy_of_certificate');
+            $table->string('name_of_organization');
+            $table->string('organization_unit');
+            $table->string('organization_job_title');
+            $table->date('organization_start_date');
+            $table->date('organization_end_date');
+            $table->integer('radius_of_operation');
 
             $table-> foreign('caregiver_id')->references('id')->on('caregivers');
             $table->timestamps();

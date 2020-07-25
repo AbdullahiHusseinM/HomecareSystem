@@ -28,7 +28,16 @@ class Caregiver extends Model
 
     public function caregiverprofile()
     {
-        return $this->hasOne(caregiverprofile::class);
+        return $this->hasOne(CaregiverProfile::class);
+    }
+
+    public function checkFields()
+    {
+        if($this->caregiverprofile) {
+            return $this->caregiverprofile->checkFields();
+        }
+
+        return false;
     }
 
 }

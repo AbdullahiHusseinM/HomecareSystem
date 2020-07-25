@@ -43,10 +43,37 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    CONST Roles = [
+        'caregiver',
+        'transporter',
+        'securityprovider',
+        'pharmacy'
+    ];
+
+    public function details()
+    {
+        if($this->role == 'caregiver') {
+            return $this->caregiver;
+        }
+
+        if($this->role == 'securityprovider') {
+            return $this->securityprovider;
+        }
+
+        if($this->role == 'transporter') {
+            return $this->transporter;
+        }
+
+        if($this->role == 'pharmacy') {
+            return $this->pharmacy;
+        }
+    }
+    
+
     public function caregiver()
     {
        
-        return $this->belongsTo(Caregiver::class, 'foreign_id', 'caregiver_id');
+        return $this->belongsTo(Caregiver::class, 'foreign_id', 'id');
         
     }
 

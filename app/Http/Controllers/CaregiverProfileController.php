@@ -40,15 +40,52 @@ class CaregiverProfileController extends Controller
      */
     public function store(Request $request, Caregiver $caregiver)
     {
-        $caregiverprofiles = new CaregiverProfile;
+        $rules = [
+        'caregiver_id' => 'required',
+        'education' => 'required',
+        'passport_photo' => 'required|mimes:jpeg,jpg,png,pdf',
+        'experience' => 'required',
+        'date_of_birth' => 'required',
+        'license_number' => 'required',
+        'license_certificate' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx',
+        'name_of_institution' => 'required',
+        'acquired_qualification' => 'required',
+        'qualification_start_date' => 'required',
+        'qualification_end_date' => 'required',
+        'copy_of_certificate' => 'required|mimes:jpeg,jpg,png,pdf,doc,docx',
+        'name_of_organization' => 'required',
+        'organization_unit' => 'required',
+        'organization_job_title' => 'required',
+        'organization_start_date' => 'required',
+        'organization_end_date' => 'required',
+        'radius_of_operation' => 'required'
+        ];
 
-        $caregiverprofiles-> caregiver_id = $request->get('caregiver_id');
-        $caregiverprofiles-> passport_photo = $request->file('passport_photo');
-        $caregiverprofiles-> education = $request->get('education');
-        $caregiverprofiles-> experience = $request->get('experience');
-        $caregiverprofiles-> license_number = $request->get('license_number');
-        $caregiverprofiles-> license_certificate = $request->file('license_certificate');
-        $caregiverprofiles-> date_of_birth = $request->get('date_of_birth');
+        $this -> validate($request, $rules);
+
+        $passport_photo = $request->file('passport_photo');
+
+        $Pass = rand() . '.' . $passport_photo->getClientOriginalExtension();
+        $passport_photo->move(public_path('images'), $Pass);
+
+        $license_certificate = $request->file('license_certificate');
+
+        $license_cert = rand() . '.' . $license_certificate->getClientOriginalExtension();
+        $license_certificate->move(public_path('images'), $license_cert);
+
+
+        $copy_of_certificate = $request->file('copy_of_certificate');
+
+        $cert_copy = rand() . '.' . $copy_of_certificate->getClientOriginalExtension();
+        $copy_of_certificate->move(public_path('images'), $cert_copy);
+
+
+       
+
+        $data = $request->all();
+
+ 
+        $caregiverprofiles = CaregiverProfile::create($data);
         
         
 

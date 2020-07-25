@@ -12,7 +12,8 @@ class InitController extends Controller
 
         return [
             'user_is_authenticated' => $auth->check(),
-            'user' => $auth->user()
+            'user_profile_is_complete' => $auth->check() ? $auth->user()->details()->checkFields() : null
         ];
     }
+
 }
